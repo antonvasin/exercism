@@ -29,7 +29,7 @@ describe('LinkedList', () => {
     expect(list.shift()).toBe(5);
   });
 
-  xtest('unshift adds element at the start of the list', () => {
+  test('unshift adds element at the start of the list', () => {
     const list = new LinkedList();
     list.unshift(23);
     list.unshift(5);
@@ -37,7 +37,7 @@ describe('LinkedList', () => {
     expect(list.shift()).toBe(23);
   });
 
-  xtest('pop, push, shift, and unshift can be used in any order', () => {
+  test('pop, push, shift, and unshift can be used in any order', () => {
     const list = new LinkedList();
     list.push(1);
     list.push(2);
@@ -53,19 +53,19 @@ describe('LinkedList', () => {
     expect(list.shift()).toBe(3);
   });
 
-  xtest('count an empty list', () => {
+  test('count an empty list', () => {
     const list = new LinkedList();
     expect(list.count()).toBe(0);
   });
 
-  xtest('count a list with items', () => {
+  test('count a list with items', () => {
     const list = new LinkedList();
     list.push(37);
     list.push(1);
     expect(list.count()).toBe(2);
   });
 
-  xtest('count is correct after mutation', () => {
+  test('count is correct after mutation', () => {
     const list = new LinkedList();
     list.push(31);
     expect(list.count()).toBe(1);
@@ -77,7 +77,7 @@ describe('LinkedList', () => {
     expect(list.count()).toBe(0);
   });
 
-  xtest("popping to empty doesn't break the list", () => {
+  test("popping to empty doesn't break the list", () => {
     const list = new LinkedList();
     list.push(41);
     list.push(59);
@@ -89,7 +89,7 @@ describe('LinkedList', () => {
     expect(list.pop()).toBe(47);
   });
 
-  xtest("shifting to empty doesn't break the list", () => {
+  test("shifting to empty doesn't break the list", () => {
     const list = new LinkedList();
     list.push(41);
     list.push(59);

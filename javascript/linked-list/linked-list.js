@@ -11,6 +11,8 @@ class Node {
 }
 
 export class LinkedList {
+  length = 0;
+
   push(value) {
     const node = new Node(value, this.last);
     if (this.last) {
@@ -19,11 +21,11 @@ export class LinkedList {
       this.first = node;
     }
     this.last = node;
-    console.log(this);
+    this.length++;
   }
 
   pop() {
-    const last = this.last.value;
+    const last = (this.last && this.last.value) || undefined;
 
     // length > 1
     if (this.last.prev) {
@@ -33,12 +35,12 @@ export class LinkedList {
       this.last = undefined;
     }
 
-    console.log(this);
+    this.length--;
     return last;
   }
 
   shift() {
-    const first = this.first.value;
+    const first = (this.first && this.first.value) || undefined;
 
     // length > 1
     if (this.first.next) {
@@ -48,11 +50,17 @@ export class LinkedList {
       this.first = undefined;
     }
 
+    this.length--;
     return first;
   }
 
-  unshift() {
-    throw new Error('Remove this statement and implement this function');
+  unshift(value) {
+    const node = new Node(value, undefined, this.first);
+    if (this.first) {
+      this.first.prev = node;
+    }
+    this.first = node;
+    this.length++;
   }
 
   delete() {
@@ -60,6 +68,6 @@ export class LinkedList {
   }
 
   count() {
-    throw new Error('Remove this statement and implement this function');
+    return this.length;
   }
 }
