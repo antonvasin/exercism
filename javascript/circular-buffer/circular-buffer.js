@@ -6,67 +6,66 @@
 class CircularBuffer {
   constructor(size) {
     this.ary = new Array(size);
+    this.size = size;
     this.oldest = null;
     this.newest = null;
   }
 
   nextId(id) {
-    return id + 1 - (this.ary.length - 1) || id + 1;
+    return (id + 1) % this.ary.length;
   }
 
-  // add newest element
   write(value) {
     const idx = this.newest !== null ? this.nextId(this.newest) : 0;
 
-    console.log(idx, this.ary);
-    if (!this.ary[idx] && idx <= this.ary.length - 1) {
-      this.ary[idx] = value;
-    } else {
+    // if next id is filled then buffer is empty
+    if (this.ary[idx]) {
       throw new BufferFullError();
     }
 
+    // write new value into buffer
+    this.ary[idx] = value;
     this.newest = idx;
 
+    // if buffer is empty point oldest to the new value
     if (this.oldest === null) {
       this.oldest = idx;
     }
-
-    // console.log('write', this);
   }
 
-  // next idx
-  // this.newest + 1 - (this.ary.length - 1)
-
-  // if empty raise error
-  // grab oldest element
-  // shift oldest to the next one or null
-  // return oldest el
   read() {
+    // throw if empty
     if (this.oldest === null) {
       throw new BufferEmptyError();
     }
 
+    // empty current oldest value
     const oldest = this.ary[this.oldest];
+    this.ary[this.oldest] = undefined;
+
     const next = this.nextId(this.oldest);
 
-    if (!this.ary[next]) {
-      this.oldest = null;
-    } else {
+    // shift oldest to the next id
+    if (this.ary[next]) {
       this.oldest = next;
-      this.ary[next] = undefined;
+      // if there is none then buffer is empty
+    } else {
+      this.oldest = null;
+      this.newest = null;
     }
 
-    // console.log('read', this);
     return oldest;
   }
 
   // write into empty space (?) or overwrite oldest element
-  overwrite() {
-    throw new Error('Remove this statement and implement this function');
+  overwrite(value) {
+    this.write(value);
   }
 
   clear() {
-    throw new Error('Remove this statement and implement this function');
+    this.oldest = null;
+    this.newest = null;
+    this.ary = new Array(this.size);
   }
 }
 
