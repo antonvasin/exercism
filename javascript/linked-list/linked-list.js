@@ -25,33 +25,39 @@ export class LinkedList {
   }
 
   pop() {
-    const last = (this.last && this.last.value) || undefined;
+    if (this.last) {
+      const last = this.last && this.last.value;
 
-    // length > 1
-    if (this.last.prev) {
-      this.last.prev.next = undefined;
-      this.last = this.last.prev;
+      if (this.last === this.first) {
+        this.last = undefined;
+        this.first = undefined;
+      } else {
+        this.last = this.last.prev;
+      }
+
+      this.length--;
+      return last;
     } else {
       this.last = undefined;
     }
-
-    this.length--;
-    return last;
   }
 
   shift() {
-    const first = (this.first && this.first.value) || undefined;
+    if (this.first) {
+      const first = this.first && this.first.value;
 
-    // length > 1
-    if (this.first.next) {
-      this.first.prev = undefined;
-      this.first = this.first.next;
+      if (this.first === this.last) {
+        this.last = undefined;
+        this.first = undefined;
+      } else {
+        this.first = this.first.next;
+      }
+
+      this.length--;
+      return first;
     } else {
-      this.first = undefined;
+      return undefined;
     }
-
-    this.length--;
-    return first;
   }
 
   unshift(value) {
@@ -63,8 +69,35 @@ export class LinkedList {
     this.length++;
   }
 
-  delete() {
-    throw new Error('Remove this statement and implement this function');
+  delete(value) {
+    let scan = true;
+    let node = this.first;
+
+    while (scan) {
+      if (node.value === value) {
+        if (node.prev) {
+          if (node === this.last) {
+            this.last = node.prev;
+          }
+
+          node.prev.next = node.next;
+        }
+
+        if (node.next) {
+          if (node === this.first) {
+            this.first = node.next;
+          }
+          node.next.prev = node.prev;
+        }
+
+        scan = false;
+        this.length--;
+      } else if (node.next) {
+        node = node.next;
+      } else {
+        scan = false;
+      }
+    }
   }
 
   count() {

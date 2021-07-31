@@ -79,6 +79,7 @@ describe('LinkedList', () => {
 
   test("popping to empty doesn't break the list", () => {
     const list = new LinkedList();
+    list.pop();
     list.push(41);
     list.push(59);
     list.pop();
@@ -91,6 +92,7 @@ describe('LinkedList', () => {
 
   test("shifting to empty doesn't break the list", () => {
     const list = new LinkedList();
+    list.shift();
     list.push(41);
     list.push(59);
     list.shift();
@@ -101,14 +103,14 @@ describe('LinkedList', () => {
     expect(list.shift()).toBe(47);
   });
 
-  xtest('deletes the only element', () => {
+  test('deletes the only element', () => {
     const list = new LinkedList();
     list.push(61);
     list.delete(61);
     expect(list.count()).toBe(0);
   });
 
-  xtest('deletes the element with the specified value from the list', () => {
+  test('deletes the element with the specified value from the list', () => {
     const list = new LinkedList();
     list.push(71);
     list.push(83);
@@ -121,7 +123,7 @@ describe('LinkedList', () => {
     expect(list.shift()).toBe(71);
   });
 
-  xtest('deletes the element with the specified value from the list, re-assigns tail', () => {
+  test('deletes the element with the specified value from the list, re-assigns tail', () => {
     const list = new LinkedList();
     list.push(71);
     list.push(83);
@@ -134,7 +136,7 @@ describe('LinkedList', () => {
     expect(list.pop()).toBe(71);
   });
 
-  xtest('deletes the element with the specified value from the list, re-assigns head', () => {
+  test('deletes the element with the specified value from the list, re-assigns head', () => {
     const list = new LinkedList();
     list.push(71);
     list.push(83);
@@ -147,7 +149,7 @@ describe('LinkedList', () => {
     expect(list.shift()).toBe(79);
   });
 
-  xtest('deletes the first of two elements', () => {
+  test('deletes the first of two elements', () => {
     const list = new LinkedList();
     list.push(97);
     list.push(101);
@@ -158,7 +160,7 @@ describe('LinkedList', () => {
     expect(list.pop()).toBe(101);
   });
 
-  xtest('deletes the second of two elements', () => {
+  test('deletes the second of two elements', () => {
     const list = new LinkedList();
     list.push(97);
     list.push(101);
@@ -169,7 +171,7 @@ describe('LinkedList', () => {
     expect(list.pop()).toBe(97);
   });
 
-  xtest('delete does not modify the list if the element is not found', () => {
+  test('delete does not modify the list if the element is not found', () => {
     const list = new LinkedList();
     list.push(89);
     list.delete(103);
@@ -177,7 +179,7 @@ describe('LinkedList', () => {
     expect(list.count()).toBe(1);
   });
 
-  xtest('deletes only the first occurence', () => {
+  test('deletes only the first occurence', () => {
     const list = new LinkedList();
     list.push(73);
     list.push(9);
