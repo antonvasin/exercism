@@ -1,7 +1,4 @@
-import CircularBuffer, {
-  BufferFullError,
-  BufferEmptyError,
-} from './circular-buffer';
+import CircularBuffer, { BufferFullError, BufferEmptyError } from './circular-buffer';
 
 describe('CircularBuffer', () => {
   test('reading empty buffer should fail', () => {
@@ -9,20 +6,20 @@ describe('CircularBuffer', () => {
     expect(() => buffer.read()).toThrow(BufferEmptyError);
   });
 
-  xtest('can read an item just written', () => {
+  test('can read an item just written', () => {
     const buffer = new CircularBuffer(1);
     buffer.write('1');
     expect(buffer.read()).toBe('1');
   });
 
-  xtest('each item may only be read once', () => {
+  test('each item may only be read once', () => {
     const buffer = new CircularBuffer(1);
     buffer.write('1');
     expect(buffer.read()).toBe('1');
     expect(() => buffer.read()).toThrow(BufferEmptyError);
   });
 
-  xtest('items are read in the order they are written', () => {
+  test('items are read in the order they are written', () => {
     const buffer = new CircularBuffer(2);
     buffer.write('1');
     buffer.write('2');
@@ -30,13 +27,13 @@ describe('CircularBuffer', () => {
     expect(buffer.read()).toBe('2');
   });
 
-  xtest("full buffer can't be written to", () => {
+  test("full buffer can't be written to", () => {
     const buffer = new CircularBuffer(1);
     buffer.write('1');
     expect(() => buffer.write(2)).toThrow(BufferFullError);
   });
 
-  xtest('a read frees up capacity for another write', () => {
+  test.only('a read frees up capacity for another write', () => {
     const buffer = new CircularBuffer(1);
     buffer.write('1');
     expect(buffer.read()).toBe('1');
