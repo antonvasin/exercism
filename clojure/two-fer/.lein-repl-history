@@ -1,0 +1,11 @@
+exit
+(require 'two-fer')
+(require 'src/two_fer')
+exit
+(require 'two-fer-test')
+(str "One" "Two")
+(str "One" " Two" (if true )
+" Three"))
+(if true "True")
+(str "One " (if true "Three" ))
+exit
