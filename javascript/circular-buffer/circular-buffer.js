@@ -59,7 +59,14 @@ class CircularBuffer {
 
   // write into empty space (?) or overwrite oldest element
   overwrite(value) {
-    this.write(value);
+    const nextId = this.nextId(this.newest);
+
+    if (!this.ary[nextId]) {
+      this.write(value);
+    } else {
+      this.ary[this.oldest] = value;
+      this.oldest = this.nextId(this.oldest);
+    }
   }
 
   clear() {

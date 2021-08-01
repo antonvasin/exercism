@@ -90,7 +90,7 @@ describe('CircularBuffer', () => {
     expect(buffer.read()).toBe('3');
   });
 
-  xtest('overwrite replaces the oldest item remaining in buffer following a read', () => {
+  test('overwrite replaces the oldest item remaining in buffer following a read', () => {
     const buffer = new CircularBuffer(3);
     buffer.write('1');
     buffer.write('2');
@@ -103,7 +103,7 @@ describe('CircularBuffer', () => {
     expect(buffer.read()).toBe('5');
   });
 
-  xtest('initial clear does not affect wrapping around', () => {
+  test('initial clear does not affect wrapping around', () => {
     const buffer = new CircularBuffer(2);
     buffer.clear();
     buffer.write('1');
