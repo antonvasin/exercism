@@ -1,0 +1,5 @@
+(require 'bob-test)
+(clojure.test/run-tests 'bob-test)
+exit
+(last "lsdkfjsdf?")
+exit
