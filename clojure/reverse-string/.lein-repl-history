@@ -1,0 +1,12 @@
+exit
+(seq "Anton")
+(reduce (fn [char rest] (str char rest)) (seq "Anton"))
+(reduce (fn [char rest] (str rest char)) (seq "Anton"))
+(reduce (fn [char rest] (str rest char)) (seq ""))
+exit
+(require '[clojure.string :as str])
+(str/split "Anton" "")
+(str/split "Anton" #"")
+('clojure.string/split' "Anton" #"")
+(clojure.string/split "Anton" #"")
+exit
